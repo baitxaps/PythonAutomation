@@ -1,7 +1,0 @@
-{
-    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python.exe",
-    "editor.fontSize": 14,
-    "files.associations": {
-        "iostream": "cpp"
-    } //设置字体大小
-}
