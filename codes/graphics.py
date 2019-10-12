@@ -5,6 +5,7 @@
 
 import os
 from PIL import Image
+from PIL import ImageColor
 
 def PILTest():
     os.chdir('/Users/jishuyanfa-ios/Desktop/vcode/PythonAutomation/project/automate_online-materials')
@@ -49,5 +50,28 @@ def PILTest():
     svelteIm = catIm.resize((width, height + 300))
     svelteIm.save('svelte.png')
     
+    # rotate
+    catIm.rotate(90).save('rotated90.png')
+    catIm.rotate(180).save('rotated180.png') 
+    catIm.rotate(270).save('rotated270.png')
+    catIm.rotate(6).save('rotated6.png')
+    catIm.rotate(6, expand=True).save('rotated6_expanded.png')
+
+    #transpose 镜像翻转
+    catIm.transpose(Image.FLIP_LEFT_RIGHT).save('horizontal_flip.png')
+    catIm.transpose(Image.FLIP_TOP_BOTTOM).save('vertical_flip.png')
+
+    # putpixel
+    im = Image.new('RGBA', (100, 100))
+    im.getpixel((0, 0))
+    for x in range(100):
+        for y in range(50):
+           im.putpixel((x, y), (210, 210, 210))
+    for x in range(100):
+        for y in range(50, 100):
+            im.putpixel((x, y), ImageColor.getcolor('darkgray', 'RGBA'))
+    im.getpixel((0, 0))
+    im.getpixel((0, 50))
+    im.save('putPixel.png')
 
 PILTest()
