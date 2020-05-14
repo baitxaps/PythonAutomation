@@ -4,6 +4,10 @@
 from collections import deque
 from collections import defaultdict
 from collections import OrderedDict
+from collections import Counter
+from operator import itemgetter
+from operator import attrgetter
+
 import heapq
 import json
 
@@ -242,14 +246,95 @@ def Slice():
     PRICE = slice(31, 37)
     cost = int(record[SHARES]) * float(record[PRICE])
 
+    items = [0, 1, 2, 3, 4, 5, 6]
+    a = slice(2, 4)
+    print(items[2:4])
+    a = slice(5, 50, 2)
+    # items[a] = [10,11]
+    # print(items)
+
+    s = 'HelloWorld'
+    a.indices(len(s))
+    print(a)
+    for i in range(*a.indices(len(s))):
+        print(s[i])
+
+
+
+# 1.12 序列中出现次数最多的元素
+def sequence():
+    words = [
+    'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+    'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+    'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+    'my', 'eyes', "you're", 'under']
+
+    word_counts = Counter(words)
+    # 出现频率最高的 3 个单词
+    top_three = word_counts.most_common(3)
+    print(top_three)
+
+    # print(word_counts['not'])
+    # print(word_counts['eyes'])
+    morewords = ['why','are','you','not','looking','in','my','eyes']
+    # for word in morewords:
+    #     word_counts[word] += 1
+    # print(word_counts['eyes'])   
+
+    print(word_counts.update(morewords))
+    a = Counter(words)
+    b = Counter(morewords)
+    c = a + b
+    d = a - b
+    print(a)
+    print(b)
+    print(c)
+    print(d)
+
+
+# 1.13 通过某个关键字排序一个字典列表
+def keywordsorted():
+    rows = [
+    {'fname': 'Brian', 'lname': 'Jones', 'uid': 1003},
+    {'fname': 'David', 'lname': 'Beazley', 'uid': 1002},
+    {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
+    {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}]
+    rows_by_fname = sorted(rows, key=itemgetter('fname'))
+    rows_by_uid = sorted(rows, key=itemgetter('uid'))
+    print(rows_by_fname)
+    print(rows_by_uid)
+
+# 1.14 排序不支持原生比较的对象
+class User:
+    def __init__(self, user_id):
+        self.user_id = user_id 
+    def __repr__(self):
+        return 'User({})'.format(self.user_id)
+
+def sort_notcompare():
+    users = [User(23), User(3), User(99)] 
+    print(users)
+    #print(sorted(users, key=lambda u: u.user_id))
+    print(sorted(users, key=attrgetter('user_id')))
+
+
+
+
+
+
+
+    
 
 if __name__ == '__main__':
     # 注释 cmd +K+C˝
     # 取消注释 cmd+K+U
     # Shift+cmd+F 实现代码的对齐
     # Ctrl+[ 和 Ctrl+] 实现文本的向左移动或者向右移动
-
-    Slice()
+    sort_notcompare()
+    #keywordsorted()
+    
+    # sequence()
+    # Slice()
     # dedupeTest()
     # keydictValue()
     # OrderedDictTest()
